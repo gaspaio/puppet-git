@@ -3,6 +3,7 @@
 define git::clone(
   $source,
   $localtree,
+  $params = "",
   $real_name = false,
   $branch = false) {
 
@@ -15,7 +16,7 @@ define git::clone(
 
   exec { "git_clone_exec_$localtree/$_name":
     cwd => $localtree,
-    command => "git clone $source $_name",
+    command => "git clone $params $source $_name",
     creates => "$localtree/$_name/.git/",
     require => Package['git']
   }
